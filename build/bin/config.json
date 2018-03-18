@@ -1,0 +1,129 @@
+{
+	"threads": 2,
+	"coin": "yocoin-pplns",
+	"name": "main",
+	"pplns": 15000,
+	"coin-name":"YOCOIN",
+
+	"proxy": {
+		"enabled": true,
+		"listen": "0.0.0.0:8888",
+		"limitHeadersSize": 1024,
+		"limitBodySize": 256,
+		"behindReverseProxy": false,
+		"blockRefreshInterval": "120ms",
+		"stateUpdateInterval": "3s",
+		"difficulty": 800000000,
+		"hashrateExpiration": "1h",
+
+		"healthCheck": true,
+		"maxFails": 100,
+
+		"stratum": {
+			"enabled": true,
+			"listen": "0.0.0.0:8008",
+			"timeout": "120s",
+			"maxConn": 8192
+		},
+		"stratum_nice_hash": {
+			"enabled": true,
+			"listen": "0.0.0.0:4444",
+			"timeout": "120s",
+			"maxConn": 8192
+		},
+
+		"policy": {
+			"workers": 8,
+			"resetInterval": "60m",
+			"refreshInterval": "1m",
+
+			"banning": {
+				"enabled": true,
+				"ipset": "blacklist",
+				"timeout": 300,
+				"invalidPercent": 30,
+				"checkThreshold": 30,
+				"malformedLimit": 50
+			},
+			"limits": {
+				"enabled": true,
+				"limit": 30,
+				"grace": "5m",
+				"limitJump": 10
+			}
+		}
+	},
+
+	"api": {
+		"enabled": true,
+		"purgeOnly": false,
+		"purgeInterval": "10m",
+		"listen": "0.0.0.0:8080",
+		"statsCollectInterval": "5s",
+		"hashrateWindow": "30m",
+		"hashrateLargeWindow": "3h",
+		"luckWindow": [64, 128, 256],
+		"payments": 30,
+		"blocks": 50
+	},
+
+	"upstreamCheckInterval": "5s",
+	"upstream": [
+		{
+			"name": "node02",
+			"url": "http://127.0.0.1:8545",
+			"timeout": "10s"
+		},
+		{
+			"name": "backup",
+			"url": "http://127.0.0.1:8545",
+			"timeout": "10s"
+		}
+	],
+
+	"redis": {
+		"endpoint": "127.0.0.1:6379",
+		"poolSize": 10,
+		"database": 6,
+		"password": ""
+	},
+
+	"unlocker": {
+		"enabled": true,
+		"poolFee": 10,
+		"poolFeeAddress": "0x06219483E217c9aD479f76a95426f689eF4D5951",
+		"donate": false,
+		"depth": 120,
+		"immatureDepth": 20,
+		"keepTxFees": true,
+		"interval": "15m",
+		"daemon": "http://127.0.0.1:8545",
+		"timeout": "10s"
+	},
+
+	"payouts": {
+		"enabled": true,
+		"requirePeers": 5,
+		"interval": "150m",
+		"daemon": "http://127.0.0.1:8545",
+		"timeout": "10s",
+		"address": "0xacc7f804dadd0a82e93c7261791f52a84da496f5",
+		"gas": "21000",
+		"gasPrice": "20000000000",
+		"autoGas": true,
+		"threshold": 10000000000,
+		"bgsave": false
+	},
+
+	"exchange": {
+		"enabled": true,
+		"url": "https://api.coinmarketcap.com/v1/ticker/?convert=VND",
+		"timeout": "50s",
+		"refreshInterval": "1800s"
+	},
+
+	"newrelicEnabled": false,
+	"newrelicName": "PROXY01_UBIQ_USCENTRAL",
+	"newrelicKey": "b30cd005408cbe2bcef6e081dc0a7ea2fe6c6a18",
+	"newrelicVerbose": false
+}
